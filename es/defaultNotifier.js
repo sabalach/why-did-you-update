@@ -16,10 +16,11 @@ export var defaultNotifier = function defaultNotifier(groupByComponent, collapse
 
 // Disables yellow box in React Native before warn
 var consoleWarn = function consoleWarn(args) {
-  var oldDisableYellowBox = console.disableYellowBox;
-  console.disableYellowBox = true;
-  console.warn(args);
-  console.disableYellowBox = oldDisableYellowBox;
+  // const oldDisableYellowBox = console.disableYellowBox;
+  // console.disableYellowBox = true;
+  // console.warn(args);
+  console.log(args);
+  // console.disableYellowBox = oldDisableYellowBox;
 };
 
 var notifyDiff = function notifyDiff(_ref) {

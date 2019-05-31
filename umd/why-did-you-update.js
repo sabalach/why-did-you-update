@@ -944,7 +944,7 @@ module.exports = isEqual;
 var isArray = Array.isArray;
 var keyList = Object.keys;
 var hasProp = Object.prototype.hasOwnProperty;
-var inBrowser = typeof window === 'object';
+var hasElementType = typeof Element !== 'undefined';
 
 function equal(a, b) {
   // fast-deep-equal index.js 2.0.1
@@ -989,7 +989,7 @@ function equal(a, b) {
 
     // start react-fast-compare
     // custom handling for DOM elements
-    if (inBrowser && a instanceof Element && b instanceof Element)
+    if (hasElementType && a instanceof Element && b instanceof Element)
       return a === b;
 
     // custom handling for React
@@ -1020,8 +1020,7 @@ module.exports = function exportedEqual(a, b) {
   try {
     return equal(a, b);
   } catch (error) {
-    if ((error.message && error.message.match(/stack|recursion/i)) || (error.number === -2146828260))
-    {
+    if ((error.message && error.message.match(/stack|recursion/i)) || (error.number === -2146828260)) {
       // warn on circular references, don't crash
       // browsers give this different errors name and messages:
       // chrome/safari: "RangeError", "Maximum call stack size exceeded"
@@ -2860,10 +2859,11 @@ var defaultNotifier = function defaultNotifier(groupByComponent, collapseCompone
 
 // Disables yellow box in React Native before warn
 var consoleWarn = function consoleWarn(args) {
-  var oldDisableYellowBox = console.disableYellowBox;
-  console.disableYellowBox = true;
-  console.warn(args);
-  console.disableYellowBox = oldDisableYellowBox;
+  // const oldDisableYellowBox = console.disableYellowBox;
+  // console.disableYellowBox = true;
+  // console.warn(args);
+  console.log(args);
+  // console.disableYellowBox = oldDisableYellowBox;
 };
 
 var defaultNotifier_notifyDiff = function notifyDiff(_ref) {
